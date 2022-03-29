@@ -35,7 +35,7 @@ const useFavoriteStore = create<FavoriteStore>(
           return;
         }
 
-        return set((prev) => ({ repositories: prev.repositories.filter((it) => it.id === target.id) }));
+        return set((prev) => ({ repositories: prev.repositories.filter((it) => it.id !== target.id) }));
       },
     }),
     {
