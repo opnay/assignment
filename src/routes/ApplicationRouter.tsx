@@ -1,6 +1,8 @@
 import React from 'react';
-import { BackHandler, Text } from 'react-native';
+import { BackHandler } from 'react-native';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-native';
+import FavoritePage from '../components/pages/Favorite';
+import SearchPage from '../components/pages/SearchPage';
 import DefaultLayout from '../components/templates/DefaultLayout';
 import AppPaths from './paths';
 
@@ -29,7 +31,8 @@ function ApplicationRouter() {
   return (
     <DefaultLayout title={title}>
       <Routes>
-        <Route path={AppPaths.Favorite.path} element={<Text>TEST</Text>} />
+        <Route path={AppPaths.Favorite.path} element={<FavoritePage />} />
+        <Route path={AppPaths.Search.path} element={<SearchPage />} />
       </Routes>
     </DefaultLayout>
   );

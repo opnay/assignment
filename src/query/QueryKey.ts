@@ -1,0 +1,3 @@
+export enum QueryKey {
+  SEARCH_REPOSITORIES = 'SEARCH_REPOSITORIES',
+}
