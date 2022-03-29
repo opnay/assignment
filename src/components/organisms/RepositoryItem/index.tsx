@@ -1,12 +1,12 @@
 import React from 'react';
-import { Button, Modal, Text } from 'react-native';
+import { Button, Modal } from 'react-native';
 import { generatePath, useLinkPressHandler } from 'react-router-native';
 import AppPaths from '../../../routes/paths';
 import useFavoriteStore from '../../../store/favorite';
 import { GHRepository } from '../../../types/github';
 import styles from './styles';
 
-const { Wrapper, TitleTouchable, FavoriteButton, ModalWrapper, ModalCard, ModalTitle, ModalDescription } = styles;
+const { Wrapper, Title, FavoriteButton, ModalWrapper, ModalCard, ModalTitle, ModalDescription } = styles;
 
 interface Props {
   data: GHRepository;
@@ -40,32 +40,32 @@ function RepositoryItem(props: Props) {
   }, []);
 
   return (
-    <Wrapper>
-      <TitleTouchable onPress={handlePressTitle}>
-        <Text>{data.full_name}</Text>
-      </TitleTouchable>
-      {!isFavorite && (
-        <FavoriteButton title={'추가'} onPress={handleFavoriteButton}>
-          추가
-        </FavoriteButton>
-      )}
-      {isFavorite && (
-        <FavoriteButton title={'삭제'} onPress={handleFavoriteDeleteButton}>
-          삭제
-        </FavoriteButton>
-      )}
+    <Wrapper underlayColor={'rgba(0, 0, 0, 0.1)'} onPress={handlePressTitle}>
+      <>
+        <Title>{data.full_name}</Title>
+        {!isFavorite && (
+          <FavoriteButton title={'추가'} onPress={handleFavoriteButton}>
+            추가
+          </FavoriteButton>
+        )}
+        {isFavorite && (
+          <FavoriteButton title={'삭제'} onPress={handleFavoriteDeleteButton}>
+            삭제
+          </FavoriteButton>
+        )}
 
-      <Modal transparent={true} visible={visibleModal} onRequestClose={handleClose}>
-        <ModalWrapper>
-          <ModalCard>
-            <ModalTitle>오류</ModalTitle>
-            <ModalDescription>최대 4개 까지 추가 가능합니다.</ModalDescription>
-            <Button title={'확인'} onPress={handleClose}>
-              확인
-            </Button>
-          </ModalCard>
-        </ModalWrapper>
-      </Modal>
+        <Modal transparent={true} visible={visibleModal} onRequestClose={handleClose}>
+          <ModalWrapper>
+            <ModalCard>
+              <ModalTitle>오류</ModalTitle>
+              <ModalDescription>최대 4개 까지 추가 가능합니다.</ModalDescription>
+              <Button title={'확인'} onPress={handleClose}>
+                확인
+              </Button>
+            </ModalCard>
+          </ModalWrapper>
+        </Modal>
+      </>
     </Wrapper>
   );
 }

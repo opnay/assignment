@@ -1,11 +1,15 @@
 import styled from '@emotion/native';
-import { Column, Row } from '../../atoms/styled/elements';
+import { Column } from '../../atoms/styled/elements';
 
 const styles = {
-  Wrapper: styled(Row)`
+  Wrapper: styled.TouchableHighlight`
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
     padding: 8px 12px 8px 12px;
   `,
-  TitleTouchable: styled.TouchableOpacity`
+  Title: styled.Text`
     flex: 1;
     font-size: 18px;
   `,
