@@ -5,7 +5,7 @@ const styles = {
   Wrapper: styled(Row)`
     padding: 8px 12px 8px 12px;
   `,
-  Title: styled.Text`
+  TitleTouchable: styled.TouchableOpacity`
     flex: 1;
     font-size: 18px;
   `,

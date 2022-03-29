@@ -1,10 +1,12 @@
 import React from 'react';
-import { Button, Modal } from 'react-native';
+import { Button, Modal, Text } from 'react-native';
+import { generatePath, useLinkPressHandler } from 'react-router-native';
+import AppPaths from '../../../routes/paths';
 import useFavoriteStore from '../../../store/favorite';
 import { GHRepository } from '../../../types/github';
 import styles from './styles';
 
-const { Wrapper, Title, FavoriteButton, ModalWrapper, ModalCard, ModalTitle, ModalDescription } = styles;
+const { Wrapper, TitleTouchable, FavoriteButton, ModalWrapper, ModalCard, ModalTitle, ModalDescription } = styles;
 
 interface Props {
   data: GHRepository;
@@ -18,6 +20,12 @@ function RepositoryItem(props: Props) {
   );
 
   const [visibleModal, setVisibleModal] = React.useState(false);
+
+  const url = React.useMemo(
+    () => generatePath(AppPaths.Issue.path, { owner: data.owner.login, repo: data.name }),
+    [data.name, data.owner.login]
+  );
+  const handlePressTitle = useLinkPressHandler(url);
 
   const handleFavoriteButton = React.useCallback(() => {
     favorite.append(data).catch(() => {
@@ -33,7 +41,9 @@ function RepositoryItem(props: Props) {
 
   return (
     <Wrapper>
-      <Title>{data.full_name}</Title>
+      <TitleTouchable onPress={handlePressTitle}>
+        <Text>{data.full_name}</Text>
+      </TitleTouchable>
       {!isFavorite && (
         <FavoriteButton title={'추가'} onPress={handleFavoriteButton}>
           추가

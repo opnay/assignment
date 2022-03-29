@@ -14,5 +14,15 @@ const Search: Path = {
   path: '/search',
 };
 
-const AppPaths = { Favorite, Search };
+const Issue: Path = {
+  title: '이슈보기',
+  path: '/issue/:owner/:repo',
+};
+
+const IssueDetail: Path = {
+  title: '이슈보기',
+  path: '/issue/detail',
+};
+
+const AppPaths = { Favorite, Search, Issue, IssueDetail };
 export default AppPaths;

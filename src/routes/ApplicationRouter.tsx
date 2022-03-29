@@ -1,7 +1,9 @@
 import React from 'react';
 import { BackHandler } from 'react-native';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-native';
+import { matchPath, Route, Routes, useLocation, useNavigate } from 'react-router-native';
 import FavoritePage from '../components/pages/Favorite';
+import IssueDetailPage from '../components/pages/IssueDetailPage';
+import IssuePage from '../components/pages/IssuePage';
 import SearchPage from '../components/pages/SearchPage';
 import DefaultLayout from '../components/templates/DefaultLayout';
 import AppPaths from './paths';
@@ -10,7 +12,7 @@ function ApplicationRouter() {
   const location = useLocation();
   const navigate = useNavigate();
   const title = React.useMemo(
-    () => Object.values(AppPaths).find((it) => it.path === location.pathname)?.title || '',
+    () => Object.values(AppPaths).find((it) => matchPath(it.path, location.pathname))?.title || '',
     [location.pathname]
   );
 
@@ -33,6 +35,8 @@ function ApplicationRouter() {
       <Routes>
         <Route path={AppPaths.Favorite.path} element={<FavoritePage />} />
         <Route path={AppPaths.Search.path} element={<SearchPage />} />
+        <Route path={AppPaths.Issue.path} element={<IssuePage />} />
+        <Route path={AppPaths.IssueDetail.path} element={<IssueDetailPage />} />
       </Routes>
     </DefaultLayout>
   );
